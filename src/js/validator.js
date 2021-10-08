@@ -1,12 +1,7 @@
 export default class Validator {
-  constructor(username) {
-    this.username = username;
-  }
-
-  validateUsername() {
-    const template1 = /[\w-]/.test(this.username); // 'Допустимые символы A-Z,a-z,0-9,-,_'
-    const template2 = /^[\d_-]|[\d_-]$/.test(this.username);
-    const template3 = /\d{4}/.test(this.username);
-    return template1 && !template2 && !template3;
+  static validateUsername(username) {
+    const template1 = /^[^_\W\d-][\w-]*[^_\W\d-]+$/.test(username); // 'Допустимые символы A-Z,a-z,0-9,-,_'
+    const template2 = /\d{4}/.test(username);
+    return template1 && !template2;
   }
 }

@@ -1,55 +1,50 @@
 import Validator from "../validator";
 
 test("corrected username", () => {
-  const username = new Validator("admin");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("admin");
   expect(received).toBeTruthy();
 });
 
 test("Заглавные буквы", () => {
-  const username = new Validator("ADMIN");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("ADMIN");
   expect(received).toBeTruthy();
 });
+
+test("имя включает кириллицу", () => {
+  const received = Validator.validateUsername("яADMIN");
+  expect(received).toBeFalsy();
+});
 test("Меньше 4 цифр подряд ", () => {
-  const username = new Validator("ad984min");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("ad984min");
   expect(received).toBeTruthy();
 });
 
 test("имя заканчивается цифрами", () => {
-  const username = new Validator("admiN__11");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("admiN__11");
   expect(received).toBeFalsy();
 });
 test("имя начинается с подчеркивания", () => {
-  const username = new Validator("_admin");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("_admin");
   expect(received).toBeFalsy();
 });
 test("имя начинается с цифры", () => {
-  const username = new Validator("10admin");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("10admin");
   expect(received).toBeFalsy();
 });
 test("имя заканчивается дефисом", () => {
-  const username = new Validator("admin-");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("admin-");
   expect(received).toBeFalsy();
 });
 test("имя начинается с дефиса", () => {
-  const username = new Validator("-admin");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("-admin");
   expect(received).toBeFalsy();
 });
 test("имя заканчивается подчеркиванием", () => {
-  const username = new Validator("admin_");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("admin_");
   expect(received).toBeFalsy();
 });
 
 test("Больше трех цифр подряд", () => {
-  const username = new Validator("ad1984min");
-  const received = username.validateUsername();
+  const received = Validator.validateUsername("ad1984min");
   expect(received).toBeFalsy();
 });
